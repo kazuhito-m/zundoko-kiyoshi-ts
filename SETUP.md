@@ -22,6 +22,12 @@ sudo npm install -g typescript typings
 sudo npm install -g mocha istanbul remap-istanbul
 ```
 
+## 型ファイルダウンロード
+
+```bash
+typings install
+```
+
 ## 番外「tsdからtypingsへ」
 
 サンプルがtsdで型ファイル持ってこようとしてたので、typingsに置き換え。
