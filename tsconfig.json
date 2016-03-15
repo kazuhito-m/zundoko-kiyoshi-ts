@@ -11,8 +11,6 @@
   ],
   "files": [
     "src/typings/main.d.ts",
-    "src/main/main.ts",
-    "src/test/main.test.ts",
     "src/main/ZundokoKiyoshi.ts",
     "src/test/ZundokoKiyoshi.test.ts"
   ]
