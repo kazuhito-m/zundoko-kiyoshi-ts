@@ -38,7 +38,7 @@ describe("ZundokoKiyoshi", () => {
     });
     
     it("実際にコンソールに出力するズンドコチェックは実行出来るか", () => {
-        sut.execZundoko();
+        sut.kiyoshi();
     });
     
 });

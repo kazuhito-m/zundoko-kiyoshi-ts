@@ -32,14 +32,14 @@ export default class ZundokoKiyoshi {
         return (Math.random() * 2) < 1;
     }
     
-    // 文字列をコンソールに書く。
-    public execZundoko() {
-        console.log(this.convertZundokoString(this.getZundokoPeriod()));
-    }
-    
     // ズンドコ配列を文字列に変換する。
     public convertZundokoString(zndkLog:boolean[]) {
         return zndkLog.map((e,i,a) => { return (e == ZundokoKiyoshi.ZUN ? "ズン" : "ドコ") }).join("") + "キ・ヨ・シ！";
+    }
+    
+    // 文字列をコンソールに書く。
+    public kiyoshi() {
+        console.log(this.convertZundokoString(this.getZundokoPeriod()));
     }
     
 }
