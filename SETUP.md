@@ -18,5 +18,6 @@
 (東方ubuntu linuxなのでsudoでグローバルインストール運用)
 
 ```bash
-sudo npm install -g typescript mocha istanbul remap-istanbul
+sudo npm install -g typescript typings
+sudo npm install -g mocha istanbul remap-istanbul
 ```
