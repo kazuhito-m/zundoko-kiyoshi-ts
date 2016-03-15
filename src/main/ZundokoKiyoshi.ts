@@ -40,17 +40,9 @@ export default class ZundokoKiyoshi {
         
     }
     
-    public convertZundokoString(zndkLog:boolean[]) {
-        let printer =  new ZundokoPrinter();
-        return printer.makeZundokoString(zndkLog);
-    }
-    
-}
-
-// ズンドコ文字列の生成だけを責務にしたクラス。
-class ZundokoPrinter {
     // ズンドコ配列を文字列に変換する。
-    public makeZundokoString(zndkLog:boolean[]) {
+    public convertZundokoString(zndkLog:boolean[]) {
         return zndkLog.map((e,i,a) => { return (e == ZundokoKiyoshi.ZUN ? "ズン" : "ドコ") }).join("");
     }
+    
 }
