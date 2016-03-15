@@ -9,8 +9,11 @@ export default class ZundokoKiyoshi {
     }
     
     public getZundokoPeriod():boolean[] {
-//        let t:boolean[] = {ZUN,ZUN,ZUN,ZUN,DOKO};
-        let t:boolean[] = [];
+        // 気に入らないが…ローカルで短く書くには再定義しかない。        
+        const ZUN:boolean = this.ZUN;
+        const DOKO:boolean = this.DOKO;
+        
+        let t:boolean[] = [ZUN,ZUN,ZUN,ZUN,DOKO];
         return t;
     } 
 }
