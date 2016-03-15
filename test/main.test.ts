@@ -1,6 +1,6 @@
-// app/test/main.test.ts
+// test/main.test.ts
 import assert from 'power-assert';
-import TestTarget from '../src/main';
+import TestTarget from '../main';
 
 describe("TestTarget", () => {
 	it("should have a name", () => {
