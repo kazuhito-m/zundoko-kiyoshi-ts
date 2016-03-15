@@ -21,3 +21,24 @@
 sudo npm install -g typescript typings
 sudo npm install -g mocha istanbul remap-istanbul
 ```
+
+## 番外「tsdからtypingsへ」
+
+サンプルがtsdで型ファイル持ってこようとしてたので、typingsに置き換え。
+
+以下のようなコマンドで `typings.json` 作った。
+
+
+```bash
+sudo npm install -g typings
+
+typings init
+
+for i in mocha power-assert power-assert-formatter empower sinon; do
+  typings install ${i} --save --ambient
+done
+
+git add ./typings.json
+git commit ./typings.json -m 'なんだかんだ'
+
+```
