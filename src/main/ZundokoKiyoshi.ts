@@ -39,7 +39,7 @@ export default class ZundokoKiyoshi {
     
     // ズンドコ配列を文字列に変換する。
     public convertZundokoString(zndkLog:boolean[]) {
-        return zndkLog.map((e,i,a) => { return (e == ZundokoKiyoshi.ZUN ? "ズン" : "ドコ") }).join("");
+        return zndkLog.map((e,i,a) => { return (e == ZundokoKiyoshi.ZUN ? "ズン" : "ドコ") }).join("") + "キ・ヨ・シ！";
     }
     
 }
