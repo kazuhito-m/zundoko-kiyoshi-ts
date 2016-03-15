@@ -24,7 +24,8 @@ sudo npm install -g typescript typings
 ## 必要ライブラリインストール＆型ファイルダウンロード
 
 ```bash
-npm install && typings install
+npm install 
+cd ./src && typings install
 ```
 
 ## テスト＆カバレッジ実行

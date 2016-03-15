@@ -10,7 +10,7 @@
     "node_modules"
   ],
   "files": [
-    "typings/main.d.ts",
+    "src/typings/main.d.ts",
     "src/main/main.ts",
     "src/test/main.test.ts"
   ]
