@@ -30,7 +30,13 @@ cd ./src && typings install
 
 ## テスト＆カバレッジ実行
 
-上記の準備ができたら、テスト実行。
+上記の準備ができたら、まずビルド。
+
+```bash
+tsc
+```
+
+次に、テスト実行。
 
 ```bash
 mocha src/test/*.test.js
