@@ -34,7 +34,7 @@ describe("ZundokoKiyoshi", () => {
         
         let actual:string = sut.convertZundokoString([ZUN,DOKO,ZUN,ZUN,ZUN,ZUN,DOKO]);
 
-        assert.equal(actual, "ズンドコズンズンズンズンドコ");
+        assert.equal(actual, "ズンドコズンズンズンズンドコキ・ヨ・シ！");
     });
     
     it("実際にコンソールに出力するズンドコチェックは実行出来るか", () => {
