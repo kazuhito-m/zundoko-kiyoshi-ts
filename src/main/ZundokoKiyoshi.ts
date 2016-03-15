@@ -51,6 +51,6 @@ export default class ZundokoKiyoshi {
 class ZundokoPrinter {
     // ズンドコ配列を文字列に変換する。
     public makeZundokoString(zndkLog:boolean[]) {
-        return "";  //　仮実装   
+        return zndkLog.map((e,i,a) => { return (e == ZundokoKiyoshi.ZUN ? "ズン" : "ドコ") }).join("");
     }
 }
