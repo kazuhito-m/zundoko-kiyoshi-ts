@@ -11,7 +11,7 @@
   ],
   "files": [
     "typings/main.d.ts",
-    "main/main.ts",
-    "test/main.test.ts"
+    "src/main/main.ts",
+    "src/test/main.test.ts"
   ]
 }

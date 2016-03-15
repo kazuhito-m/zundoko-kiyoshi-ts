@@ -32,13 +32,14 @@ npm install && typings install
 上記の準備ができたら、テスト実行。
 
 ```bash
-mocha test/*.test.js
+mocha src/test/*.test.js
 ```
 
 これでOKのようなら、カバレッジを取ることも可能。
 
 ```bash
-istanbul cover _mocha -- ./test/*.test.js
+istanbul cover _mocha -- src/test/*.test.js
+cd coverage && remap-istanbul -i coverage.json -o html-report -t html
 ```
 
 終わると、converage ディレクトリができていて、そこに結果がHTMLで貯まる。
