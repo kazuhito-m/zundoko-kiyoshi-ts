@@ -24,9 +24,26 @@ sudo npm install -g typescript typings
 ## 必要ライブラリインストール＆型ファイルダウンロード
 
 ```bash
-npm install
-typings install
+npm install && typings install
 ```
+
+## テスト＆カバレッジ実行
+
+上記の準備ができたら、テスト実行。
+
+```bash
+mocha test/*.test.js
+```
+
+これでOKのようなら、カバレッジを取ることも可能。
+
+```bash
+istanbul cover _mocha -- ./test/*.test.js
+```
+
+終わると、converage ディレクトリができていて、そこに結果がHTMLで貯まる。
+
+---
 
 ## 番外「tsdからtypingsへ」
 
@@ -46,5 +63,12 @@ done
 
 git add ./typings.json
 git commit ./typings.json -m 'なんだかんだ'
-
 ```
+
+## 作業中にお世話になったサイト一覧
+
++ http://qiita.com/wadahiro/items/5d8a81252f2105112339
++ http://qiita.com/phi/items/9fcca3e7af5d25ff2653
++ https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/import
++ http://qiita.com/gitseitanaka/items/ea47d261284879a1d774
+
