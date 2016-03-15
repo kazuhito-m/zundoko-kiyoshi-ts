@@ -1,3 +1,5 @@
+/// <reference path="typings/main.d.ts" />
+
 // test/main.test.ts
 import assert from 'power-assert';
 import TestTarget from '../main';
