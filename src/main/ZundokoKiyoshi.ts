@@ -6,9 +6,6 @@ export default class ZundokoKiyoshi {
     public static ZUN:boolean  = false;
     public static DOKO:boolean = true;
     
-    public constructor() {
-    }
-    
     // ズンドコ列を真偽値の配列で返す。
     public getZundokoPeriod():boolean[] {
         
