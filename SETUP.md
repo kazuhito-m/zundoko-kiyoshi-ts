@@ -25,7 +25,6 @@ sudo npm install -g typescript typings
 
 ```bash
 npm install 
-cd ./src && typings install
 ```
 
 ## テスト＆カバレッジ実行
@@ -50,6 +49,16 @@ cd coverage && remap-istanbul -i coverage.json -o html-report -t html
 ```
 
 終わると、converage ディレクトリができていて、そこに結果がHTMLで貯まる。
+
+## …を、便利にやってくれるタスクを定義
+
+上記の一連の`tsd`,`mocha`,`istanbul` を一撃でやってくれるタスクを用意しています。
+
+```bash
+npm test
+```
+
+これで、テストがコケないソースであれば、カバレッジまで持ってってくれます。s
 
 ---
 

@@ -4,12 +4,17 @@
   "description": "俗に言う「ズンドコキヨシ」ロジックのTypeScript版。",
   "main": "index.js",
   "directories": {
-    "main": "main",
-    "test": "test"
+    "main": "src/main",
+    "test": "src/test"
   },
   "scripts": {
-    "test": "mocha src/test/*.test.js"
+    "postinstall": "cd src && typings install",
+    "clean": "find -E . -regex './src/.+\\.(js|map)$' -type f | xargs rm && rm -rf ./build",
+    "pretest": "tsc",
+    "test": "istanbul cover _mocha -- ./src/test/*.test.js",
+    "posttest": "cd coverage && remap-istanbul -i coverage.json -o html-report -t html"
   },
+  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Remote-Pairpro/zundoko-kiyoshi-ts.git"
