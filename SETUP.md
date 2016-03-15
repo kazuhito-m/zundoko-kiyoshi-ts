@@ -20,6 +20,7 @@
 ```bash
 sudo npm install -g typescript typings
 sudo npm install -g mocha istanbul remap-istanbul
+sudo npm install -g intelli-espower-loader power-assert
 ```
 
 ## 型ファイルダウンロード
