@@ -37,5 +37,9 @@ describe("ZundokoKiyoshi", () => {
         assert.equal(actual, "ズンドコズンズンズンズンドコ");
     });
     
+    it("実際にコンソールに出力するズンドコチェックは実行出来るか", () => {
+        sut.execZundoko();
+    });
+    
 });
 

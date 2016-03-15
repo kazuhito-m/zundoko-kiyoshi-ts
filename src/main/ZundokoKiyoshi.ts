@@ -37,7 +37,7 @@ export default class ZundokoKiyoshi {
     
     // 文字列をコンソールに書く。
     public execZundoko() {
-        
+        console.log(this.convertZundokoString(this.getZundokoPeriod()));
     }
     
     // ズンドコ配列を文字列に変換する。
