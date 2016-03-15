@@ -18,5 +18,5 @@
 (東方ubuntu linuxなのでsudoでグローバルインストール運用)
 
 ```bash
-sudo epm install -g mocha istanbul remap-istanbul
+sudo npm install -g node-typescript mocha istanbul remap-istanbul
 ```
