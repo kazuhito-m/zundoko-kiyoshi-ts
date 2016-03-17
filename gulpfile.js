@@ -5,16 +5,17 @@ var sourcemaps = require('gulp-sourcemaps');
 var istanbul = require('gulp-istanbul');
 var remapIstanbul = require('remap-istanbul/lib/gulpRemapIstanbul');
 var del = require('del');
-// var concat = require('gulp-concat');
-
-// typescriptのオブジェクトと、tsconfig.jsonを読み込んだプロジェクトオブジェクト作成。 
 var typescript = require('gulp-typescript');
 var tsProject = typescript.createProject('tsconfig.json', function() {
-  typescript: require('typescript')
+    // typescriptのオブジェクトと、tsconfig.jsonを読み込んだプロジェクトオブジェクト作成。 
+    typescript: require('typescript')
 });
+// var concat = require('gulp-concat');
 
 // 定数群
 const TEST_BUILD_DIR = './test-build/';
+
+// タスク群。
 
 gulp.task('test-clean', function(cb) {
     return del([TEST_BUILD_DIR, './coverage'], cb);
@@ -76,7 +77,7 @@ gulp.task('test', ['pre-test'] , function() {
         return gulp.src('./coverage/coverage-final.json')
             .pipe(remapIstanbul({
                 reports: {
-                        'json': './coverage/coverage.json',
+                    'json': './coverage/coverage.json',
                     'html': './coverage/html-report'
                 }
             }));
