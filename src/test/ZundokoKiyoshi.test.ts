@@ -36,6 +36,13 @@ describe("ZundokoKiyoshi", () => {
 
         assert.equal(actual, "ズンドコズンズンズンズンドコキ・ヨ・シ！");
     });
+
+    it("ズンドコ生成ロジックはちゃんとキ・ヨ・シ！で終了しているか", () => {
+        const SUFIX:string = "ズンズンズンズンドコキ・ヨ・シ！";
+        let r:string = sut.createZundokoLine();
+        let actual:string = r.substring(r.length - SUFIX.length);
+        assert.equal(actual, SUFIX);
+    });
     
     it("実際にコンソールに出力するズンドコチェックは実行出来るか", () => {
         sut.kiyoshi();

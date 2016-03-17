@@ -37,6 +37,11 @@ export default class ZundokoKiyoshi {
         return zndkLog.map((e,i,a) => { return (e == ZundokoKiyoshi.ZUN ? "ズン" : "ドコ") }).join("") + "キ・ヨ・シ！";
     }
     
+    // ズンドコ文字列を生成する
+    public createZundokoLine():string {
+        return this.convertZundokoString(this.getZundokoPeriod());
+    }
+    
     // 文字列をコンソールに書く。
     public kiyoshi() {
         console.log(this.convertZundokoString(this.getZundokoPeriod()));
