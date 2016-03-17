@@ -44,7 +44,7 @@ describe("ZundokoKiyoshi", () => {
     });
     
     it("ズンドコ生成ロジックはちゃんとキ・ヨ・シ！で終了しているか", () => {
-        const SUFIX:string = "ズンズンズンズンドコキ・ヨ・シ！";
+        const SUFIX:string = "ズンズンズンズンドコ" + ZundokoKiyoshi.SUFFIX;
         let r:string = sut.createZundokoLine();
         let actual:string = r.substring(r.length - SUFIX.length);
         assert.equal(actual, SUFIX);
