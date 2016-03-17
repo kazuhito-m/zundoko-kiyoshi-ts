@@ -44,7 +44,7 @@ export default class ZundokoKiyoshi {
     
     // 文字列をコンソールに書く。
     public kiyoshi() {
-        console.log(this.convertZundokoString(this.getZundokoPeriod()));
+        console.log(this.createZundokoLine());
     }
     
 }
