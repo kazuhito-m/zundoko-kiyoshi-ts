@@ -3,6 +3,9 @@ var gutil = require('gulp-util');
 var mocha = require('gulp-mocha');
 // var concat = require('gulp-concat');
 
+// 定数群
+var TEST_BUILD_DIR = './test-build/';
+
 // typescriptのオブジェクトと、tsconfig.jsonを読み込んだプロジェクトオブジェクト作成。 
 var typescript = require('gulp-typescript');
 var tsProject = typescript.createProject('tsconfig.json', function() {
@@ -17,13 +20,13 @@ gulp.task('test-transpile', function() {
     .js 
     // ファイルをひとまとめに
     // .pipe(concat("main.js"))
-    .pipe(gulp.dest('./test-build/'));
+    .pipe(gulp.dest(TEST_BUILD_DIR));
 });
 
 
 
 gulp.task('test-mocha', function() {
-  return gulp.src(['test-build/test/*.test.js'], { read: false })
+  return gulp.src([TEST_BUILD_DIR + 'test/*.test.js'], { read: false })
     .pipe(mocha({ reporter: 'list'}))
     .on('error', gutil.log);
 });
