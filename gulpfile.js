@@ -16,7 +16,7 @@ const TEST_BUILD_DIR = './test-build/';
 
 gulp.task('test-transpile', function() {
   // 対象となるファイルを全部指定
-  gulp.src(['./src/**/*.ts','!./src/typings/**'])
+  return gulp.src(['./src/**/*.ts','!./src/typings/**'])
     .pipe(sourcemaps.init())
     .pipe(typescript(tsProject))
     // jsプロパティを参照
