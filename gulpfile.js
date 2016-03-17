@@ -1,4 +1,6 @@
 var gulp = require('gulp');
+var gutil = require('gulp-util');
+var mocha = require('gulp-mocha');
 // var concat = require('gulp-concat');
 
 // typescriptのオブジェクトと、tsconfig.jsonを読み込んだプロジェクトオブジェクト作成。 
@@ -16,4 +18,12 @@ gulp.task('test-transpile', function() {
     // ファイルをひとまとめに
     // .pipe(concat("main.js"))
     .pipe(gulp.dest('./test-build/'));
+});
+
+
+
+gulp.task('test-mocha', function() {
+  return gulp.src(['test-build/test/*.test.js'], { read: false })
+    .pipe(mocha({ reporter: 'list'}))
+    .on('error', gutil.log);
 });
