@@ -103,3 +103,9 @@ git commit ./typings.json -m 'なんだかんだ'
 + https://github.com/SitePen/remap-istanbul/wiki/Using-Gulp
 + https://www.npmjs.com/package/remap-istanbul
 + http://qiita.com/progre/items/37e632123d74145bf0c2
++ http://blog.anatoo.jp/entry/20140420/1397995711
++ http://qiita.com/shinnn/items/bd7ad79526eff37cebd0
++ http://akabeko.me/blog/2015/01/gulp-copy-keep-dir-structure/
++ http://yaakaito.org/blog/2013/03/24/test-driven-typescript/
++ https://www.npmjs.com/package/gulp-sourcemaps
++ https://github.com/SBoudrias/gulp-istanbul
