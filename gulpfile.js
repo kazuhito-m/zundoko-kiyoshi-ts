@@ -16,9 +16,11 @@ var tsProject = typescript.createProject('tsconfig.json', function() {
 gulp.task('test-transpile', function() {
   // 対象となるファイルを全部指定
   gulp.src(['./src/**/*.ts','!./src/typings/**'])
+    .pipe(sourcemaps.init())
     .pipe(typescript(tsProject))
     // jsプロパティを参照
     .js
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(TEST_BUILD_DIR));
 });
 
