@@ -6,6 +6,9 @@ export default class ZundokoKiyoshi {
     public static ZUN:boolean  = false;
     public static DOKO:boolean = true;
     
+    // ズンドコサフィックス
+    public static SUFFIX:string = "キ・ヨ・シ！";
+    
     // ズンドコ列を真偽値の配列で返す。
     public getZundokoPeriod():boolean[] {
         
@@ -34,7 +37,7 @@ export default class ZundokoKiyoshi {
     
     // ズンドコ配列を文字列に変換する。
     public convertZundokoString(zndkLog:boolean[]) {
-        return zndkLog.map((e,i,a) => { return (e == ZundokoKiyoshi.ZUN ? "ズン" : "ドコ") }).join("") + "キ・ヨ・シ！";
+        return zndkLog.map((e,i,a) => { return (e == ZundokoKiyoshi.ZUN ? "ズン" : "ドコ") }).join("") + ZundokoKiyoshi.SUFFIX;
     }
     
     // ズンドコ文字列を生成する
@@ -42,6 +45,11 @@ export default class ZundokoKiyoshi {
         return this.convertZundokoString(this.getZundokoPeriod());
     }
     
+    // ズンドコ文字列からズンドコ回数を取得する。
+    public countZundoko(zndkLine:string):number {
+        return (zndkLine.length - ZundokoKiyoshi.SUFFIX.length) / 2;
+    }
+
     // 文字列をコンソールに書く。
     public kiyoshi() {
         console.log(this.createZundokoLine());

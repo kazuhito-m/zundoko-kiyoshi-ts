@@ -5,6 +5,8 @@ import ZundokoKiyoshi from '../main/ZundokoKiyoshi';
 
 describe("ZundokoKiyoshi", () => {
 
+    const SUMPLE_ZUNDOKO_LINE = "ズンドコズンズンズンズンドコ" + ZundokoKiyoshi.SUFFIX;
+
     var sut = new ZundokoKiyoshi();
 
     it("ズンドコの概念を定数として提供するか", () => {
@@ -34,16 +36,20 @@ describe("ZundokoKiyoshi", () => {
         
         let actual:string = sut.convertZundokoString([ZUN,DOKO,ZUN,ZUN,ZUN,ZUN,DOKO]);
 
-        assert.equal(actual, "ズンドコズンズンズンズンドコキ・ヨ・シ！");
+        assert.equal(actual, SUMPLE_ZUNDOKO_LINE);
     });
 
+    it("ズンドコ文字列からズンドコ回数を取得出来る", () => {
+        assert.equal(sut.countZundoko(SUMPLE_ZUNDOKO_LINE), 7);
+    });
+    
     it("ズンドコ生成ロジックはちゃんとキ・ヨ・シ！で終了しているか", () => {
         const SUFIX:string = "ズンズンズンズンドコキ・ヨ・シ！";
         let r:string = sut.createZundokoLine();
         let actual:string = r.substring(r.length - SUFIX.length);
         assert.equal(actual, SUFIX);
     });
-    
+
     it("実際にコンソールに出力するズンドコチェックは実行出来るか", () => {
         sut.kiyoshi();
     });
