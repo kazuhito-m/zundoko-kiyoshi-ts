@@ -88,4 +88,14 @@ git commit ./typings.json -m 'なんだかんだ'
 + http://qiita.com/phi/items/9fcca3e7af5d25ff2653
 + https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/import
 + http://qiita.com/gitseitanaka/items/ea47d261284879a1d774
++ http://hblog.glamenv-septzen.info/entry/2015/03/22/233241
 
+### gulp周り
+
++ http://qiita.com/Jxck_/items/efaff21b977ddc782971
++ http://creator.aainc.co.jp/archives/6649
++ http://qiita.com/yuichiroharai/items/42e559e2c15e1e5ffa39
++ http://qiita.com/nogson/items/fbcd0602871aeddabe33
++ http://qiita.com/iguchi1124/items/3830877d190ab72e3a1b
++ http://hideack.hatenablog.com/entry/2014/10/04/195322
+    
