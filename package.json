@@ -20,6 +20,7 @@
   },
   "author": "@kazuhito_m",
   "devDependencies": {
+    "del": "^2.2.0",
     "gulp": "^3.9.1",
     "gulp-istanbul": "^0.10.3",
     "gulp-mocha": "^2.2.0",
