@@ -14,13 +14,14 @@
     "test": "istanbul cover _mocha -- ./src/test/*.test.js",
     "posttest": "cd coverage && remap-istanbul -i coverage.json -o html-report -t html"
   },
-  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Remote-Pairpro/zundoko-kiyoshi-ts.git"
   },
   "author": "@kazuhito_m",
   "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-typescript": "^2.12.1",
     "intelli-espower-loader": "^1.0.1",
     "istanbul": "^0.4.2",
     "mocha": "^2.4.5",

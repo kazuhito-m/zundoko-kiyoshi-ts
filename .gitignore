@@ -1,5 +1,5 @@
 src/typings/
 node_modules/
+test-build/
 coverage/
-*.js
 *.js.map
