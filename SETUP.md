@@ -93,9 +93,13 @@ git commit ./typings.json -m 'なんだかんだ'
 ### gulp周り
 
 + http://qiita.com/Jxck_/items/efaff21b977ddc782971
++ http://qiita.com/morou/items/d54000396a2a7d0714de
 + http://creator.aainc.co.jp/archives/6649
 + http://qiita.com/yuichiroharai/items/42e559e2c15e1e5ffa39
 + http://qiita.com/nogson/items/fbcd0602871aeddabe33
 + http://qiita.com/iguchi1124/items/3830877d190ab72e3a1b
++ http://qiita.com/iwata-n@github/items/1e8f629eb5b429a49e6d
 + http://hideack.hatenablog.com/entry/2014/10/04/195322
-    
++ https://github.com/SitePen/remap-istanbul/wiki/Using-Gulp
++ https://www.npmjs.com/package/remap-istanbul
++ http://qiita.com/progre/items/37e632123d74145bf0c2
