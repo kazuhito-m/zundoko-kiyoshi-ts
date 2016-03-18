@@ -89,15 +89,7 @@ gulp.task('test', ['pre-test'] , function() {
     .pipe(istanbul.enforceThresholds({ thresholds: { global: 75 } }));
 });
 
-gulp.task('preview' , function () {
-    return gulp.src(['src/main/*.ts'])
-        .pipe(typescript(tsProject))
-        .js
-        .pipe(concat('app.js'))
-        .pipe(gulp.dest('site/js/'));
-});
-
-gulp.task('tsify', function () {
+gulp.task('preview', function () {
     return browserify()
         .add('./src/main/ZundokoKiyoshi.ts')
         .add('./src/main/ZundokoButton.ts')
