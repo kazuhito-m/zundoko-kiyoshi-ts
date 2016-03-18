@@ -3,8 +3,8 @@
 export default class ZundokoKiyoshi {
     
     // "ズン"と"ドコ"の定数
-    public static ZUN:boolean  = false;
     public static DOKO:boolean = true;
+    public static ZUN:boolean = ZundokoKiyoshi.DOKO;
     
     // ズンドコサフィックス
     public static SUFFIX:string = "キ・ヨ・シ！";
