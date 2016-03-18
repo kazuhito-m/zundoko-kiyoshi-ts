@@ -61,8 +61,27 @@ class ZundokoButton {
         this.store.save(this);
     }
     
+    // Twitterコメントを飛ばす…ための窓のURLを作成する。
     private makeTwitterLinkUrl():string {
-        return "テストだよ";
+        const MAX = 107;
+        const NAME = "ズンドコボタン";
+        let word = "";
+        let line = this.latestZundoko();
+        if (line.length > 0) {
+            let count = this.engine.countZundoko(line);
+            word = "kiyoshi()関数で " + count.toString(10) + " ズンドコが出ました。[" + line + "]";
+            if (word.length > MAX) {
+                word = word.substring(0,MAX - 2) + "…]";
+            }
+        } else {
+            word = NAME + "は、kiyoshi()関数をいつでも何度でも好きなだけ叩けます！";
+        }
+        // URLの組み立て。
+        let url:string = "http://twitter.com/share?text="
+            + encodeURIComponent(word)
+            + "&url=http://bit.ly/259xEoF&hashtags="
+            + encodeURIComponent(NAME);
+        return url;
     }
 
 }
