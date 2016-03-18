@@ -1,6 +1,0 @@
-src/typings/
-node_modules/
-test-build/
-coverage/
-*.js.map
-site/js/app.js
