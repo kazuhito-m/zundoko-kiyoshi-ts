@@ -5,9 +5,10 @@ var sourcemaps = require('gulp-sourcemaps');
 var istanbul = require('gulp-istanbul');
 var remapIstanbul = require('remap-istanbul/lib/gulpRemapIstanbul');
 var del = require('del');
+var concat = require("gulp-concat");
 var typescript = require('gulp-typescript');
 var tsProject = typescript.createProject('tsconfig.json', function() {
-    // typescriptのオブジェクトと、tsconfig.jsonを読み込んだプロジェクトオブジェクト作成。 
+    // typescriptのオブジェクトと、tsconfig.jsonを読み込んだプロジェクトオブジェクト作成。
     typescript: require('typescript')
 });
 // var concat = require('gulp-concat');
@@ -84,4 +85,12 @@ gulp.task('test', ['pre-test'] , function() {
     })
     // アウトの基準は"75%"くらいにしとく？
     .pipe(istanbul.enforceThresholds({ thresholds: { global: 75 } }));
+});
+
+gulp.task('preview' , function () {
+    return gulp.src(['src/main/*.ts'])
+        .pipe(typescript(tsProject))
+        .js
+        .pipe(concat('app.js'))
+        .pipe(gulp.dest('site/js/'));
 });
