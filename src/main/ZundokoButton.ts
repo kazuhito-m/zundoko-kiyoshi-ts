@@ -27,7 +27,7 @@ class ZundokoButton {
         this.zundokoHistory = ko.observableArray(loaded);
         
         this.getTwitterHref = ko.computed(():string => {
-            return "ここは計算で出す予定です。";
+            return this.makeTwitterLinkUrl();
         },this);
 
     }
@@ -59,6 +59,10 @@ class ZundokoButton {
         this.zundokoCount(0);
         this.zundokoHistory.splice(0, this.zundokoHistory().length);
         this.store.save(this);
+    }
+    
+    private makeTwitterLinkUrl():string {
+        return "テストだよ";
     }
 
 }
