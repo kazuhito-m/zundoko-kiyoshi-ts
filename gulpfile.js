@@ -6,6 +6,8 @@ var istanbul = require('gulp-istanbul');
 var remapIstanbul = require('remap-istanbul/lib/gulpRemapIstanbul');
 var del = require('del');
 var concat = require("gulp-concat");
+var browserify = require("browserify");
+var source = require('vinyl-source-stream');
 var typescript = require('gulp-typescript');
 var tsProject = typescript.createProject('tsconfig.json', function() {
     // typescriptのオブジェクトと、tsconfig.jsonを読み込んだプロジェクトオブジェクト作成。
@@ -93,4 +95,17 @@ gulp.task('preview' , function () {
         .js
         .pipe(concat('app.js'))
         .pipe(gulp.dest('site/js/'));
+});
+
+gulp.task('tsify', function () {
+    return browserify()
+        .add('./src/main/ZundokoKiyoshi.ts')
+        .add('./src/main/ZundokoButton.ts')
+        .plugin('tsify', {
+            target: 'ES6',
+            removeComments: true
+        })
+        .bundle()
+        .pipe(source('app.js'))
+        .pipe(gulp.dest('./site/js'));
 });

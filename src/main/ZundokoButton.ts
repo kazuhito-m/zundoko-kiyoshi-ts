@@ -65,14 +65,17 @@ class ZundokoRecord {
 
 // 履歴情報を永続化するクラス。
 class ZundokoStore {
+    // localStrageに保存するキー文字列。
+    private static KEY:string = 'zundokoButton';
 
     // 内部保存するかフラグ
     public localSave: boolean = true;
 
     public load():ZundokoRecord[] {
         let loaded:ZundokoRecord[] = [];
-        if (this.localSave) {
-            loaded = JSON.parse(localStorage.getItem('zundokoButton'));
+        let json:string = localStorage.getItem(ZundokoStore.KEY);
+        if (this.localSave && json !== null) {
+            loaded = JSON.parse(json);
         }
         return loaded;
     }
@@ -89,7 +92,7 @@ class ZundokoStore {
             }
             // JSON文字列にしてlocalStrage保存。
             let json:string = JSON.stringify(forSave);
-            localStorage.setItem('zundokoButton' , json);
+            localStorage.setItem(ZundokoStore.KEY , json);
         }
     }
 
