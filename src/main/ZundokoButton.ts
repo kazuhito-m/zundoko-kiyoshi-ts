@@ -26,10 +26,6 @@ class ZundokoButton {
         this.zundokoCount = ko.observable(latest.no);
         this.zundokoHistory = ko.observableArray(loaded);
         
-        // this.getTwitterHref = ko.computed({():string => {
-        //     return "ここは計算で出す予定です。";
-        // },this});
-
         this.getTwitterHref = ko.computed(():string => {
             return "ここは計算で出す予定です。";
         },this);
