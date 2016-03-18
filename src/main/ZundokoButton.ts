@@ -8,6 +8,7 @@ class ZundokoButton {
     public zundokoHistory: KnockoutObservableArray<ZundokoRecord>;
     public latestZundoko: KnockoutObservable<string>;
     public zundokoCount: KnockoutObservable<number>;
+    public getTwitterHref: KnockoutComputed<string>;
 
     // 心臓と言うべき「ズンドコキヨシ」オブジェクト。
     private engine:ZundokoKiyoshi = new ZundokoKiyoshi();
@@ -24,6 +25,15 @@ class ZundokoButton {
         this.latestZundoko = ko.observable(latest.line);
         this.zundokoCount = ko.observable(latest.no);
         this.zundokoHistory = ko.observableArray(loaded);
+        
+        // this.getTwitterHref = ko.computed({():string => {
+        //     return "ここは計算で出す予定です。";
+        // },this});
+
+        this.getTwitterHref = ko.computed(():string => {
+            return "ここは計算で出す予定です。";
+        },this);
+
     }
 
     //　ズンドコ実行！

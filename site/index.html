@@ -95,7 +95,11 @@
       <button type="button text-center" class="btn btn-primary btn-lg" data-bind='click: execKiyoshi'>kiyoshi()実行</button>
       <p></p>
       <p>(仕様上の最小 5 ズンドコ、最大 ? ズンドコ)</p>
-      <p>最高の「キ・ヨ・シ！」が出たなら、<a href="">つぶやく</a> のもありかも？</p>
+      <p>最高の「キ・ヨ・シ！」が出たなら、
+        <a data-bind="attr: {href: getTwitterHref}"" 
+            onClick="window.open(encodeURI(decodeURI(this.href)), 'tweetwindow', 'width=650, height=470, personalbar=0, toolbar=0, scrollbars=1, sizable=1'); return false;" 
+            rel="nofollow">つぶやく</a>
+          のもありかも？</p>
       <div class="panel panel-success">
         <div class="panel-heading">
           <h3 class="panel-title text-left">直近のズンドコは…</h3>
