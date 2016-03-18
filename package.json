@@ -9,10 +9,7 @@
   },
   "scripts": {
     "postinstall": "cd src && typings install",
-    "clean": "find -E . -regex './src/.+\\.(js|map)$' -type f | xargs rm && rm -rf ./build",
-    "pretest": "tsc",
-    "test": "istanbul cover _mocha -- ./src/test/*.test.js",
-    "posttest": "cd coverage && remap-istanbul -i coverage.json -o html-report -t html"
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
