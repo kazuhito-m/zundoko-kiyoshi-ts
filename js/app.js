@@ -10,6 +10,9 @@ class ZundokoButton {
         this.latestZundoko = ko.observable(latest.line);
         this.zundokoCount = ko.observable(latest.no);
         this.zundokoHistory = ko.observableArray(loaded);
+        this.getTwitterHref = ko.computed(() => {
+            return this.makeTwitterLinkUrl();
+        }, this);
     }
     execKiyoshi() {
         if (this.latestZundoko().length > 0) {
@@ -30,6 +33,27 @@ class ZundokoButton {
         this.zundokoCount(0);
         this.zundokoHistory.splice(0, this.zundokoHistory().length);
         this.store.save(this);
+    }
+    makeTwitterLinkUrl() {
+        const MAX = 107;
+        const NAME = "ズンドコボタン";
+        let word = "";
+        let line = this.latestZundoko();
+        if (line.length > 0) {
+            let count = this.engine.countZundoko(line);
+            word = "kiyoshi()関数で " + count.toString(10) + " ズンドコが出ました。[" + line + "]";
+            if (word.length > MAX) {
+                word = word.substring(0, MAX - 2) + "…]";
+            }
+        }
+        else {
+            word = NAME + "は、kiyoshi()関数をいつでも何度でも好きなだけ叩けます！";
+        }
+        let url = "http://twitter.com/share?text="
+            + encodeURIComponent(word)
+            + "&url=http://bit.ly/259xEoF&hashtags="
+            + encodeURIComponent(NAME);
+        return url;
     }
 }
 class ZundokoRecord {
