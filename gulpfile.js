@@ -9,6 +9,7 @@ var concat = require("gulp-concat");
 var browserify = require("browserify");
 var source = require('vinyl-source-stream');
 var typescript = require('gulp-typescript');
+var ghPages = require('gulp-gh-pages');
 var tsProject = typescript.createProject('tsconfig.json', function() {
     // typescriptのオブジェクトと、tsconfig.jsonを読み込んだプロジェクトオブジェクト作成。
     typescript: require('typescript')
@@ -89,7 +90,7 @@ gulp.task('test', ['pre-test'] , function() {
     .pipe(istanbul.enforceThresholds({ thresholds: { global: 75 } }));
 });
 
-gulp.task('preview', function () {
+gulp.task('build', function () {
     return browserify()
         .add('./src/main/ZundokoKiyoshi.ts')
         .add('./src/main/ZundokoButton.ts')
@@ -100,4 +101,9 @@ gulp.task('preview', function () {
         .bundle()
         .pipe(source('app.js'))
         .pipe(gulp.dest('./site/js'));
+});
+
+gulp.task('deploy', ['build'], function() {
+    return gulp.src('./site/**/*')
+        .pipe(ghPages());
 });
