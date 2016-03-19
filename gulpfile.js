@@ -95,7 +95,7 @@ gulp.task('test', ['pre-test'], function () {
 
 // patchバージョンを上げる
 gulp.task('verup-patch', function () {
-    gulp.src('./package.json')
+    return gulp.src('./package.json')
         .pipe(bump({ type: 'patch' }))
         .pipe(through.obj(function (file, enc, cb) {
             // package.json からファイルを読んで、version取り出し、クラスファイルに反映。
