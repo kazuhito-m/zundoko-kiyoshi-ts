@@ -15,4 +15,4 @@ build:
                 npm run verup-patch
                 npm run download-typings
                 npm run build
-                git push "https://$GITHUB_TOKEN@github.com/kazuhito-m/zundoko-kiyoshi-ts" HEAD:master 
+                git push
