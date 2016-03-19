@@ -13,6 +13,7 @@ var ghPages = require('gulp-gh-pages');
 var bump = require('gulp-bump');
 var fs = require('fs');
 var through  = require('through2');
+var git = require('gulp-git');
 var tsProject = typescript.createProject('tsconfig.json', function() {
     // typescriptのオブジェクトと、tsconfig.jsonを読み込んだプロジェクトオブジェクト作成。
     typescript: require('typescript')
@@ -103,6 +104,11 @@ gulp.task('verup-patch', function(){
             fs.writeFile('./src/main/AppVersion.ts', code);
             cb(null, file);
         }))
+        .on('end', function() {
+            // 成功で終わったら、書き換えたファイルをcommit するように。
+            return gulp.src(['./package.json','./src/main/AppVersion.ts'])
+                .pipe(git.commit('patch version incliment.'));
+        })
         .pipe(gulp.dest('./'));
 });
  
