@@ -14,6 +14,7 @@ var bump = require('gulp-bump');
 var fs = require('fs');
 var through = require('through2');
 var git = require('gulp-git');
+var runSequence = require('run-sequence');
 var tsProject = typescript.createProject('tsconfig.json', function () {
     // typescriptのオブジェクトと、tsconfig.jsonを読み込んだプロジェクトオブジェクト作成。
     typescript: require('typescript')
@@ -125,8 +126,10 @@ gulp.task('build', function () {
         .pipe(gulp.dest('./site/js'));
 });
 
-gulp.task('deploy', ['verup-patch','build'], function () {
+gulp.task('deploy', function () {
     return gulp.src('./site/**/*')
+        // デプロイ前には必ず、バージョンアップ＆ビルドをすること。
+        .pipe(runSequence('verup-patch', 'build'))
         .pipe(ghPages())
         .on('end', function () {
             // Version番号をインクリメントしているので、git pushをしておく
