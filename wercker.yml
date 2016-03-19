@@ -9,6 +9,18 @@ build:
                 echo "node version $(node -v) running"
                 echo "npm version $(npm -v) running"
         - script:
+            name: Prepare .ssh directory
+            code: mkdir -p "$HOME/.ssh"
+        - create-file:
+            name: Prepare ssh key
+            filename: $HOME/.ssh/id_rsa
+            overwrite: true
+            hide-from-log: true
+            content: $GITHUB_DEPLOY_KEY_PRIVATE
+        - script:
+            name: Set permissions for ssh key
+            code: chmod 0400 $HOME/.ssh/id_rsa
+        - script:
             name: Prepare gitconfig
             code: |
                 git config --global user.email "kazuhito-m@example.com"
@@ -19,10 +31,4 @@ build:
                 npm run verup-patch
                 npm run download-typings
                 npm run build
-                npm run git-push
-deploy:
-    steps:
-        - script:
-            name: Build and Deploy to github pages
-            code: |
                 npm run git-push
