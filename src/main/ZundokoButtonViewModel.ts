@@ -15,6 +15,15 @@ class ZundokoButtonViewModel {
     // ローカル保存してくれるヤーツ。
     private store = new ZundokoStore();
 
+    // プロパティ(ReadOnly)
+    public get latestLine():string {
+        return this.latestZundoko().line;
+    }
+
+    public get latestCount():number {
+        return this.latestZundoko().count;
+    }
+
     // コンストラクタ
     public constructor() {
         // ストレージから読めるようなら、一件目をちぎって表示、そうでなければ空表示。
@@ -50,6 +59,11 @@ class ZundokoButtonViewModel {
         this.zundokoHistory.splice(0, this.zundokoHistory().length);
         this.saveLocal();
     }
+
+    // localStrageに保存する。
+    private saveLocal() {
+        this.store.save(this.latestZundoko() , this.zundokoHistory());
+    }
     
     // Twitterコメントを飛ばす…ための窓のURLを作成する。
     private makeTwitterLinkUrl():string {
@@ -73,20 +87,6 @@ class ZundokoButtonViewModel {
         return url;
     }
     
-    // localStrageに保存する。
-    private saveLocal() {
-        this.store.save(this.latestZundoko() , this.zundokoHistory());
-    }
-    
-    // プロパティ
-    public get latestLine():string {
-        return this.latestZundoko().line;
-    }
-
-    public get latestCount():number {
-        return this.latestZundoko().count;
-    }
-
 }
 
 ko.applyBindings(new ZundokoButtonViewModel());
