@@ -74,7 +74,7 @@ class ZundokoButtonViewModel {
     
     // localStrageに保存する。
     private saveLocal() {
-        this.store.save(this);
+        this.store.save(this.latestZundoko() , this.zundokoHistory());
     }
     
     // プロパティ
@@ -105,15 +105,14 @@ class ZundokoStore {
         return loaded;
     }
 
-    public save(target:ZundokoButtonViewModel) {
+    public save(nowRecord:ZundokoRecord , history:ZundokoRecord[]) {
         if (this.localSave) {
             let forSave:ZundokoRecord[] = [];
-            let nowZundoko = target.latestZundoko();
             // 一度でもボタンが押されてたら、
             // 現在表示中のものまでを含んだ配列にし、JSONでローカル保存。
-            if (nowZundoko.line.length > 0) {
-                forSave = target.zundokoHistory().slice(0); // 手っ取り早い配列のコピー。
-                forSave.unshift(nowZundoko);
+            if (nowRecord.line.length > 0) {
+                forSave = history.slice(0); // 手っ取り早い配列のコピー。
+                forSave.unshift(nowRecord);
             }
             // JSON文字列にしてlocalStrage保存。
             let json:string = JSON.stringify(forSave);
