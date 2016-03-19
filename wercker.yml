@@ -20,4 +20,4 @@ build:
                 npm run verup-patch
                 npm run download-typings
                 npm run build
-                git push
+                git push "https:/github.com/kazuhito-m/zundoko-kiyoshi-ts.git" HEAD:master 
