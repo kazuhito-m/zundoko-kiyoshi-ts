@@ -3,6 +3,7 @@
 import ZundokoRecord from './ZundokoRecord';
 import ZundokoStore from './ZundokoStore';
 import AppVersion from './AppVersion';
+import TwitterLinkMaker from './TwitterLinkMaker';
 
 class ZundokoButtonViewModel {
 
@@ -35,7 +36,7 @@ class ZundokoButtonViewModel {
         this.appVersion = ko.observable(AppVersion.version);
         
         this.getTwitterHref = ko.computed(():string => {
-            return this.makeTwitterLinkUrl();
+            return (new TwitterLinkMaker()).makeUrl(this.latestZundoko());
         },this);
 
     }
@@ -63,28 +64,6 @@ class ZundokoButtonViewModel {
     // localStrageに保存する。
     private saveLocal() {
         this.store.save(this.latestZundoko() , this.zundokoHistory());
-    }
-    
-    // Twitterコメントを飛ばす…ための窓のURLを作成する。
-    private makeTwitterLinkUrl():string {
-        const MAX = 107;
-        const NAME = "ズンドコボタン";
-        let word = "";
-        let latest:ZundokoRecord = this.latestZundoko();
-        if (latest.line.length > 0) {
-            word = "kiyoshi()関数で " + latest.count.toString(10) + " ズンドコが出ました。[" + latest.line + "]";
-            if (word.length > MAX) {
-                word = word.substring(0,MAX - 2) + "…]";
-            }
-        } else {
-            word = NAME + "は、kiyoshi()関数をいつでも何度でも好きなだけ叩けます！";
-        }
-        // URLの組み立て。
-        let url:string = "http://twitter.com/share?text="
-            + encodeURIComponent(word)
-            + "&url=http://bit.ly/259xEoF&hashtags="
-            + encodeURIComponent(NAME);
-        return url;
     }
     
 }
