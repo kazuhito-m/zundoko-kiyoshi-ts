@@ -12,3 +12,9 @@ TypeScript のテスト模索環境だったりします。
 
 ネタ元は完全[ここ](http://blog.syati.info/post/typescript_coverage/)依存…。
 
+## UI実装「ズンドコボタン」
+
+[こちら](http://kazuhito-m.github.io/zundoko-kiyoshi-ts/) でズンドコできます。
+
++ HTML & Typescript(トランスパイル後はJS) + Knockuot.js でできたボタンの実装です
++ 中はZundokoKiyoshiクラスをそのまま使っています
