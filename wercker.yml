@@ -17,5 +17,6 @@ build:
             name: version incriment and build and commit
             code: |
                 npm run verup-patch
+                npm run download-typings
                 npm run build
                 npm run git-push
