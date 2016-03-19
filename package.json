@@ -11,7 +11,10 @@
     "postinstall": "gulp download-typings",
     "download-typings": "gulp download-typings",
     "test": "gulp test",
+    "verup-patch": "gulp verup-patch",
     "build": "gulp build",
+    "upload-ghpages": "gulp upload-ghpages",
+    "git-push": "gulp git-push",
     "deploy": "gulp deploy"
   },
   "repository": {
