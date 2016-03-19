@@ -10,6 +10,7 @@ var browserify = require("browserify");
 var source = require('vinyl-source-stream');
 var typescript = require('gulp-typescript');
 var ghPages = require('gulp-gh-pages');
+var bump = require('gulp-bump');
 var tsProject = typescript.createProject('tsconfig.json', function() {
     // typescriptのオブジェクトと、tsconfig.jsonを読み込んだプロジェクトオブジェクト作成。
     typescript: require('typescript')
@@ -89,6 +90,13 @@ gulp.task('test', ['pre-test'] , function() {
     .pipe(istanbul.enforceThresholds({ thresholds: { global: 75 } }));
 });
 
+// バージョンを上げる
+gulp.task('verup-patch', function(){
+    gulp.src('./package.json')
+        .pipe(bump({type:'patch'}))
+        .pipe(gulp.dest('./'));
+});
+ 
 gulp.task('build', function () {
     return browserify()
         .add('./src/main/ZundokoKiyoshi.ts')
