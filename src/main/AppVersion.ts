@@ -1,3 +1,3 @@
 export default class AppVersion {
-	public static version = "1.0.13";
+	public static version = "1.0.14";
 }
