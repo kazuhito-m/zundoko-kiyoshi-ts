@@ -8,16 +8,3 @@ build:
             code: |
                 echo "node version $(node -v) running"
                 echo "npm version $(npm -v) running"
-        - script:
-            name: Prepare gitconfig
-            code: |
-                git config --global user.email "kazuhito-m@example.com"
-                git config --global user.name "kazuhito-m"
-        - script:
-            name: version incriment and build and commit
-            code: |
-                git checkout master
-                npm run verup-patch
-                npm run download-typings
-                npm run build
-                git push "https://$GITHUB_TOKEN@github.com/kazuhito-m/zundoko-kiyoshi-ts" HEAD:master 
