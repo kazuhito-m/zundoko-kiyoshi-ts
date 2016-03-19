@@ -1,7 +1,16 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 "use strict";
+class AppVersion {
+}
+AppVersion.version = "1.0.0";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = AppVersion;
+
+},{}],2:[function(require,module,exports){
+"use strict";
 const ZundokoKiyoshi_1 = require('./ZundokoKiyoshi');
-class ZundokoButton {
+const AppVersion_1 = require('./AppVersion');
+class ZundokoButtonViewModel {
     constructor() {
         this.engine = new ZundokoKiyoshi_1.default();
         this.store = new ZundokoStore();
@@ -13,6 +22,7 @@ class ZundokoButton {
         this.getTwitterHref = ko.computed(() => {
             return this.makeTwitterLinkUrl();
         }, this);
+        this.appVersion = ko.observable(AppVersion_1.default.version);
     }
     execKiyoshi() {
         if (this.latestZundoko().length > 0) {
@@ -89,9 +99,9 @@ class ZundokoStore {
     }
 }
 ZundokoStore.KEY = 'zundokoButton';
-ko.applyBindings(new ZundokoButton());
+ko.applyBindings(new ZundokoButtonViewModel());
 
-},{"./ZundokoKiyoshi":2}],2:[function(require,module,exports){
+},{"./AppVersion":1,"./ZundokoKiyoshi":3}],3:[function(require,module,exports){
 "use strict";
 class ZundokoKiyoshi {
     getZundokoPeriod() {
@@ -129,4 +139,4 @@ ZundokoKiyoshi.SUFFIX = "キ・ヨ・シ！";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = ZundokoKiyoshi;
 
-},{}]},{},[2,1]);
+},{}]},{},[3,2]);
