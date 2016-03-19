@@ -15,6 +15,7 @@
     "src/main/ZundokoButtonViewModel.ts",
     "src/main/ZundokoRecord.ts",
     "src/main/ZundokoStore.ts",
+    "src/main/TwitterLinkMaker.ts",
     "src/test/ZundokoKiyoshiTest.ts"
   ]
 }
