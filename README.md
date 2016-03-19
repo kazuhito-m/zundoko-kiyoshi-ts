@@ -1,5 +1,9 @@
 # ズンドコキヨシ by TypeScript
 
+## Latest integration
+
++ master [![wercker status](https://app.wercker.com/status/e666f7614ef93bab18a19c8cae05b6c5/s "wercker status")](https://app.wercker.com/project/bykey/e666f7614ef93bab18a19c8cae05b6c5) by Wercker
+
 ## What's this ?
 
 俗に言う「ズンドコキヨシ」ロジックのTypeScript版。
