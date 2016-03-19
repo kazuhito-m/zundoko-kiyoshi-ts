@@ -4,6 +4,9 @@ build:
     - npm-install
     - npm-test
     - script:
+        name: githab-pages deploy
+        code: npm run deploy
+    - script:
         name: echo nodejs information
         code: |
           echo "node version $(node -v) running"
