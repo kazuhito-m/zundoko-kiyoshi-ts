@@ -25,6 +25,10 @@ class ZundokoButtonViewModel {
         return this.latestZundoko().count;
     }
 
+    public get latestNo(): number {
+        return this.latestZundoko().no;
+    }
+
     // コンストラクタ
     public constructor() {
         // ストレージから読めるようなら、一件目をちぎって表示、そうでなければ空表示。
