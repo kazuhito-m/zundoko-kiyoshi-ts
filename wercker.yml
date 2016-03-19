@@ -31,5 +31,6 @@ deploy:
         - script:
             name: Build and Deploy to github pages
             code: |
+                find ./
                 npm run download-typings
                 npm run deploy
