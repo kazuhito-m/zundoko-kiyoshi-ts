@@ -139,5 +139,5 @@ gulp.task('deploy', function (cb) {
     // デプロイ前には必ず、バージョンアップ＆ビルドをすること。
     // Version番号をインクリメントしているので、git pushをしておく
     // (色々あったら問題だがgit的にはクリーンな状態でdeployしているだろうという推測)
-    return runSequence('verup-patch', 'build', 'upload-ghpages', 'git-push');
+    return runSequence('verup-patch', 'build', 'upload-ghpages', 'git-push', cb);
 });
