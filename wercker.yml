@@ -9,6 +9,11 @@ build:
                 echo "node version $(node -v) running"
                 echo "npm version $(npm -v) running"
         - script:
+            name: Prepare gitconfig
+            code: |
+                git config --global user.email "kazuhito-m@example.com"
+                git config --global user.name "kazuhito-m"
+        - script:
             name: version incriment and build and commit
             code: |
                 git checkout master
