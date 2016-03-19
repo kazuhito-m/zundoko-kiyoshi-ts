@@ -6,7 +6,7 @@ build:
     - script:
         name: githab-pages deploy
         code: |
-          gulp download-typings
+          npm run download-typings
           npm run deploy
     - script:
         name: echo nodejs information

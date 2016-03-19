@@ -9,6 +9,7 @@
   },
   "scripts": {
     "postinstall": "gulp download-typings",
+    "download-typings": "gulp download-typings",
     "test": "gulp test",
     "build": "gulp build",
     "deploy": "gulp deploy"
