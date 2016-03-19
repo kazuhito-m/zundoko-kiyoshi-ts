@@ -14,7 +14,8 @@ export default class TwitterLinkMaker {
         const OMIT_SUFFIX = "…]";
         let word = "";
         if (record.line.length > 0) {
-            word = "kiyoshi()関数で " + record.count.toString(10) + " ズンドコが出ました。[" + record.line + "]";
+            word = "kiyoshi()関数で " + record.count.toString(10) + " ズンドコが出ました。("
+                + record.no + "回目結果) [" + record.line + "]";
             if (word.length > MAX) {
                 word = word.substring(0, MAX - OMIT_SUFFIX.length) + OMIT_SUFFIX;
             }
