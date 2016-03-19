@@ -4,11 +4,6 @@ build:
         - npm-install
         - npm-test
         - script:
-            name: githab-pages deploy
-            code: |
-                git config --global user.email "kazuhito-m@example.com"
-                git config --global user.name "kazuhito-m"
-        - script:
             name: echo nodejs information
             code: |
                 echo "node version $(node -v) running"
