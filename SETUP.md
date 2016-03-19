@@ -109,3 +109,6 @@ git commit ./typings.json -m 'なんだかんだ'
 + http://yaakaito.org/blog/2013/03/24/test-driven-typescript/
 + https://www.npmjs.com/package/gulp-sourcemaps
 + https://github.com/SBoudrias/gulp-istanbul
++ https://www.npmjs.com/package/gulp-git
++ http://horicdesign.com/js/entry-146.html
++ http://dackdive.hateblo.jp/entry/2014/09/15/155641
