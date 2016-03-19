@@ -125,7 +125,12 @@ gulp.task('build', function () {
         .pipe(gulp.dest('./site/js'));
 });
 
-gulp.task('deploy', ['build'], function() {
+gulp.task('deploy', ['verup-patch'] , ['build'], function() {
     return gulp.src('./site/**/*')
-        .pipe(ghPages());
+        .pipe(ghPages())
+        .on('end', function() {
+            // Version番号をインクリメントしているので、git pushをしておく
+            // (色々あったら問題だがgit的にはクリーンな状態でdeployしているだろうという推測)
+            return git.push();
+        });
 });
