@@ -11,6 +11,7 @@ var source = require('vinyl-source-stream');
 var typescript = require('gulp-typescript');
 var ghPages = require('gulp-gh-pages');
 var bump = require('gulp-bump');
+var fs = require('fs');
 var tsProject = typescript.createProject('tsconfig.json', function() {
     // typescriptのオブジェクトと、tsconfig.jsonを読み込んだプロジェクトオブジェクト作成。
     typescript: require('typescript')
@@ -90,10 +91,16 @@ gulp.task('test', ['pre-test'] , function() {
     .pipe(istanbul.enforceThresholds({ thresholds: { global: 75 } }));
 });
 
-// バージョンを上げる
+// patchバージョンを上げる
 gulp.task('verup-patch', function(){
     gulp.src('./package.json')
         .pipe(bump({type:'patch'}))
+        .on('end', function(i) {
+            // package.json からファイルを読んで、version取り出し、クラスファイルに反映。
+            var packageJson = require('./package.json');
+            var code = 'export default class AppVersion {\n	public static version = "' + packageJson.version + '";\n}';
+            fs.writeFile('./src/main/AppVersion.ts', code);
+        })
         .pipe(gulp.dest('./'));
 });
  
