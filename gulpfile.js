@@ -14,6 +14,7 @@ var bump = require('gulp-bump');
 var fs = require('fs');
 var through = require('through2');
 var git = require('gulp-git');
+var typings = require("gulp-typings");
 var runSequence = require('run-sequence');
 var tsProject = typescript.createProject('tsconfig.json', function () {
     // typescriptのオブジェクトと、tsconfig.jsonを読み込んだプロジェクトオブジェクト作成。
@@ -24,6 +25,11 @@ var tsProject = typescript.createProject('tsconfig.json', function () {
 const TEST_BUILD_DIR = './test-build/';
 
 // タスク群。
+
+gulp.task("download-typings",function(){
+    gulp.src("./src/typings.json")
+        .pipe(typings());
+});
 
 gulp.task('test-clean', function (cb) {
     return del([TEST_BUILD_DIR, './coverage'], cb);
