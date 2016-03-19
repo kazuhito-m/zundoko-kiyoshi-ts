@@ -126,14 +126,18 @@ gulp.task('build', function () {
         .pipe(gulp.dest('./site/js'));
 });
 
-gulp.task('deploy', function () {
+gulp.task('upload-ghpages', function () {
     return gulp.src('./site/**/*')
-        // デプロイ前には必ず、バージョンアップ＆ビルドをすること。
-        .pipe(runSequence('verup-patch', 'build'))
-        .pipe(ghPages())
-        .on('end', function () {
-            // Version番号をインクリメントしているので、git pushをしておく
-            // (色々あったら問題だがgit的にはクリーンな状態でdeployしているだろうという推測)
-            return git.push();
-        });
+        .pipe(ghPages());
+});
+
+gulp.task('git-push', function () {
+    git.push();
+});
+
+gulp.task('deploy', function (cb) {
+    // デプロイ前には必ず、バージョンアップ＆ビルドをすること。
+    // Version番号をインクリメントしているので、git pushをしておく
+    // (色々あったら問題だがgit的にはクリーンな状態でdeployしているだろうという推測)
+    return runSequence('verup-patch', 'build', 'upload-ghpages', 'git-push');
 });
