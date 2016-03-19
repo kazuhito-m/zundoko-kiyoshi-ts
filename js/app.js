@@ -8,52 +8,16 @@ exports.default = AppVersion;
 
 },{}],2:[function(require,module,exports){
 "use strict";
-const ZundokoKiyoshi_1 = require('./ZundokoKiyoshi');
-const AppVersion_1 = require('./AppVersion');
-class ZundokoButtonViewModel {
-    constructor() {
-        this.engine = new ZundokoKiyoshi_1.default();
-        this.store = new ZundokoStore();
-        let loaded = this.store.load();
-        let latest = (loaded.length > 0) ? loaded.shift() : new ZundokoRecord(0, "", 0);
-        this.latestZundoko = ko.observable(latest.line);
-        this.zundokoCount = ko.observable(latest.no);
-        this.zundokoHistory = ko.observableArray(loaded);
-        this.getTwitterHref = ko.computed(() => {
-            return this.makeTwitterLinkUrl();
-        }, this);
-        this.appVersion = ko.observable(AppVersion_1.default.version);
-    }
-    execKiyoshi() {
-        if (this.latestZundoko().length > 0) {
-            this.zundokoHistory.unshift(this.getNowZundokoRecord());
-        }
-        let line = this.engine.createZundokoLine();
-        let count = this.engine.countZundoko(line);
-        this.latestZundoko(line);
-        this.zundokoCount(count);
-        this.store.save(this);
-    }
-    getNowZundokoRecord() {
-        let no = this.zundokoHistory().length + 1;
-        return new ZundokoRecord(no, this.latestZundoko(), this.zundokoCount());
-    }
-    clearZundokoHistory() {
-        this.latestZundoko("");
-        this.zundokoCount(0);
-        this.zundokoHistory.splice(0, this.zundokoHistory().length);
-        this.store.save(this);
-    }
-    makeTwitterLinkUrl() {
-        const MAX = 107;
+class TwitterLinkMaker {
+    makeUrl(record) {
         const NAME = "ズンドコボタン";
+        const MAX = TwitterLinkMaker.MAX;
+        const OMIT_SUFFIX = "…]";
         let word = "";
-        let line = this.latestZundoko();
-        if (line.length > 0) {
-            let count = this.engine.countZundoko(line);
-            word = "kiyoshi()関数で " + count.toString(10) + " ズンドコが出ました。[" + line + "]";
+        if (record.line.length > 0) {
+            word = "kiyoshi()関数で " + record.count.toString(10) + " ズンドコが出ました。[" + record.line + "]";
             if (word.length > MAX) {
-                word = word.substring(0, MAX - 2) + "…]";
+                word = word.substring(0, MAX - OMIT_SUFFIX.length) + OMIT_SUFFIX;
             }
         }
         else {
@@ -66,42 +30,54 @@ class ZundokoButtonViewModel {
         return url;
     }
 }
-class ZundokoRecord {
-    constructor(no, line, count) {
-        this.no = no;
-        this.line = line;
-        this.count = count;
-    }
-}
-class ZundokoStore {
+TwitterLinkMaker.MAX = 107;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = TwitterLinkMaker;
+
+},{}],3:[function(require,module,exports){
+"use strict";
+const ZundokoRecord_1 = require('./ZundokoRecord');
+const ZundokoStore_1 = require('./ZundokoStore');
+const AppVersion_1 = require('./AppVersion');
+const TwitterLinkMaker_1 = require('./TwitterLinkMaker');
+class ZundokoButtonViewModel {
     constructor() {
-        this.localSave = true;
+        this.store = new ZundokoStore_1.default();
+        let loaded = this.store.load();
+        let latest = (loaded.length > 0) ? loaded.shift() : ZundokoRecord_1.default.create(0, false);
+        this.latestZundoko = ko.observable(latest);
+        this.zundokoHistory = ko.observableArray(loaded);
+        this.appVersion = ko.observable(AppVersion_1.default.version);
+        this.getTwitterHref = ko.computed(() => {
+            return (new TwitterLinkMaker_1.default()).makeUrl(this.latestZundoko());
+        }, this);
     }
-    load() {
-        let loaded = [];
-        let json = localStorage.getItem(ZundokoStore.KEY);
-        if (this.localSave && json !== null) {
-            loaded = JSON.parse(json);
-        }
-        return loaded;
+    get latestLine() {
+        return this.latestZundoko().line;
     }
-    save(target) {
-        if (this.localSave) {
-            let forSave = [];
-            let nowZundoko = target.getNowZundokoRecord();
-            if (nowZundoko.line.length > 0) {
-                forSave = target.zundokoHistory().slice(0);
-                forSave.unshift(nowZundoko);
-            }
-            let json = JSON.stringify(forSave);
-            localStorage.setItem(ZundokoStore.KEY, json);
+    get latestCount() {
+        return this.latestZundoko().count;
+    }
+    execKiyoshi() {
+        if (this.latestZundoko().line.length > 0) {
+            this.zundokoHistory.unshift(this.latestZundoko());
         }
+        let nowNo = this.zundokoHistory().length + 1;
+        this.latestZundoko(ZundokoRecord_1.default.create(nowNo, true));
+        this.saveLocal();
+    }
+    clearZundokoHistory() {
+        this.latestZundoko(ZundokoRecord_1.default.create(1, false));
+        this.zundokoHistory.splice(0, this.zundokoHistory().length);
+        this.saveLocal();
+    }
+    saveLocal() {
+        this.store.save(this.latestZundoko(), this.zundokoHistory());
     }
 }
-ZundokoStore.KEY = 'zundokoButton';
 ko.applyBindings(new ZundokoButtonViewModel());
 
-},{"./AppVersion":1,"./ZundokoKiyoshi":3}],3:[function(require,module,exports){
+},{"./AppVersion":1,"./TwitterLinkMaker":2,"./ZundokoRecord":5,"./ZundokoStore":6}],4:[function(require,module,exports){
 "use strict";
 class ZundokoKiyoshi {
     getZundokoPeriod() {
@@ -139,4 +115,58 @@ ZundokoKiyoshi.SUFFIX = "キ・ヨ・シ！";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = ZundokoKiyoshi;
 
-},{}]},{},[3,2]);
+},{}],5:[function(require,module,exports){
+"use strict";
+const ZundokoKiyoshi_1 = require('./ZundokoKiyoshi');
+class ZundokoRecord {
+    constructor(no, line, count) {
+        this.no = no;
+        this.line = line;
+        this.count = count;
+    }
+    execKiyoshi() {
+        let engine = new ZundokoKiyoshi_1.default();
+        this.line = engine.createZundokoLine();
+        this.count = engine.countZundoko(this.line);
+    }
+    static create(no, execKiyoshi) {
+        let rec = new ZundokoRecord(no, "", 0);
+        if (execKiyoshi)
+            rec.execKiyoshi();
+        return rec;
+    }
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = ZundokoRecord;
+
+},{"./ZundokoKiyoshi":4}],6:[function(require,module,exports){
+"use strict";
+class ZundokoStore {
+    constructor() {
+        this.localSave = true;
+    }
+    load() {
+        let loaded = [];
+        let json = localStorage.getItem(ZundokoStore.KEY);
+        if (this.localSave && json !== null) {
+            loaded = JSON.parse(json);
+        }
+        return loaded;
+    }
+    save(nowRecord, history) {
+        if (this.localSave) {
+            let forSave = [];
+            if (nowRecord.line.length > 0) {
+                forSave = history.slice(0);
+                forSave.unshift(nowRecord);
+            }
+            let json = JSON.stringify(forSave);
+            localStorage.setItem(ZundokoStore.KEY, json);
+        }
+    }
+}
+ZundokoStore.KEY = 'zundokoButton';
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = ZundokoStore;
+
+},{}]},{},[4,3]);
