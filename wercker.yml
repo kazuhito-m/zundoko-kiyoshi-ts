@@ -1,8 +1,6 @@
 box: node
 build:
     steps:
-        - npm-install
-        - npm-test
         - script:
             name: echo nodejs information
             code: |
@@ -10,7 +8,6 @@ build:
                 echo "npm version $(npm -v) running"
 deploy:
     steps:
-        - npm-install
         - script:
             name: Prepare .ssh directory
             code: mkdir -p "$HOME/.ssh"
@@ -31,6 +28,6 @@ deploy:
         - script:
             name: Build and Deploy to github pages
             code: |
-                find ./
+                find ./src
                 npm run download-typings
                 npm run deploy
