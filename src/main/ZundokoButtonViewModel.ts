@@ -1,13 +1,15 @@
 /// <reference path="../typings/main.d.ts" />
 
 import ZundokoKiyoshi from './ZundokoKiyoshi';
+import AppVersion from './AppVersion';
 
-class ZundokoButton {
+class ZundokoButtonViewModel {
 
     // プロパティっぽいもの
     public zundokoHistory: KnockoutObservableArray<ZundokoRecord>;
     public latestZundoko: KnockoutObservable<string>;
     public zundokoCount: KnockoutObservable<number>;
+    public appVersion: KnockoutObservable<string>;
     public getTwitterHref: KnockoutComputed<string>;
 
     // 心臓と言うべき「ズンドコキヨシ」オブジェクト。
@@ -30,6 +32,7 @@ class ZundokoButton {
             return this.makeTwitterLinkUrl();
         },this);
 
+        this.appVersion = ko.observable(AppVersion.version);
     }
 
     //　ズンドコ実行！
@@ -109,7 +112,7 @@ class ZundokoStore {
         return loaded;
     }
 
-    public save(target:ZundokoButton) {
+    public save(target:ZundokoButtonViewModel) {
         if (this.localSave) {
             let forSave:ZundokoRecord[] = [];
             let nowZundoko = target.getNowZundokoRecord();
@@ -127,4 +130,4 @@ class ZundokoStore {
 
 }
 
-ko.applyBindings(new ZundokoButton());
+ko.applyBindings(new ZundokoButtonViewModel());
