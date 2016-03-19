@@ -15,7 +15,7 @@ build:
             name: Prepare ssh key
             filename: $HOME/.ssh/id_rsa
             overwrite: true
-            hide-from-log: false
+            hide-from-log: true
             content: $GITHUB_DEPLOY_KEY_PRIVATE
         - script:
             name: Set permissions for ssh key
@@ -28,6 +28,7 @@ build:
         - script:
             name: Build and Deploy to github pages
             code: |
+                git clone git@github.com:kazuhito-m/zundoko-kiyoshi-ts.git .publish
                 npm run download-typings
                 npm run deploy
                 find ./src
