@@ -12,6 +12,7 @@ var typescript = require('gulp-typescript');
 var ghPages = require('gulp-gh-pages');
 var bump = require('gulp-bump');
 var fs = require('fs');
+var through  = require('through2');
 var tsProject = typescript.createProject('tsconfig.json', function() {
     // typescriptのオブジェクトと、tsconfig.jsonを読み込んだプロジェクトオブジェクト作成。
     typescript: require('typescript')
@@ -95,12 +96,13 @@ gulp.task('test', ['pre-test'] , function() {
 gulp.task('verup-patch', function(){
     gulp.src('./package.json')
         .pipe(bump({type:'patch'}))
-        .on('end', function(i) {
+        .pipe(through.obj(function(file,enc,cb) {
             // package.json からファイルを読んで、version取り出し、クラスファイルに反映。
-            var packageJson = require('./package.json');
+            var packageJson = JSON.parse(file._contents);
             var code = 'export default class AppVersion {\n	public static version = "' + packageJson.version + '";\n}';
             fs.writeFile('./src/main/AppVersion.ts', code);
-        })
+            cb(null, file);
+        }))
         .pipe(gulp.dest('./'));
 });
  
