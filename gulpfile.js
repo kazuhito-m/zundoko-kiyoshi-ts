@@ -14,7 +14,6 @@ var tsProject = typescript.createProject('tsconfig.json', function() {
     // typescriptのオブジェクトと、tsconfig.jsonを読み込んだプロジェクトオブジェクト作成。
     typescript: require('typescript')
 });
-// var concat = require('gulp-concat');
 
 // 定数群
 const TEST_BUILD_DIR = './test-build/';
@@ -72,7 +71,7 @@ gulp.task('pre-test', ['test-retranspile-main'] , function () {
 });
 
 gulp.task('test', ['pre-test'] , function() {
-  return gulp.src([TEST_BUILD_DIR + 'test/*.test.js'], { read: false })
+  return gulp.src([TEST_BUILD_DIR + 'test/*Test.js'], { read: false })
     .pipe(mocha({ reporter: 'list'}))
     .on('error', gutil.log)
     .pipe(istanbul.writeReports())
@@ -93,7 +92,7 @@ gulp.task('test', ['pre-test'] , function() {
 gulp.task('build', function () {
     return browserify()
         .add('./src/main/ZundokoKiyoshi.ts')
-        .add('./src/main/ZundokoButton.ts')
+        .add('./src/main/ZundokoButtonViewModel.ts')
         .plugin('tsify', {
             target: 'ES6',
             removeComments: true

@@ -12,6 +12,7 @@
   "files": [
     "src/typings/main.d.ts",
     "src/main/ZundokoKiyoshi.ts",
-    "src/test/ZundokoKiyoshi.test.ts"
+    "src/main/ZundokoButtonViewModel.ts",
+    "src/test/ZundokoKiyoshiTest.ts"
   ]
 }
