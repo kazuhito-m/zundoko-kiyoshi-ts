@@ -1,17 +1,39 @@
 box: node
 build:
-  steps:
-    - npm-install
-    - npm-test
-    - script:
-        name: githab-pages deploy
-        code: |
-          git config --global user.email "kazuhito-m@example.com"
-          git config --global user.name "kazuhito-m"
-          npm run download-typings
-          npm run deploy
-    - script:
-        name: echo nodejs information
-        code: |
-          echo "node version $(node -v) running"
-          echo "npm version $(npm -v) running"
+    steps:
+        - npm-install
+        - npm-test
+        - script:
+            name: githab-pages deploy
+            code: |
+                git config --global user.email "kazuhito-m@example.com"
+                git config --global user.name "kazuhito-m"
+        - script:
+            name: echo nodejs information
+            code: |
+                echo "node version $(node -v) running"
+                echo "npm version $(npm -v) running"
+deploy:
+    steps:
+        - script:
+            name: Prepare .ssh directory
+            code: mkdir -p "$HOME/.ssh"
+        - create-file:
+            name: Prepare ssh key
+            filename: $HOME/.ssh/id_rsa
+            overwrite: true
+            hide-from-log: true
+            content: $GITHUB_DEPLOY_KEY_PRIVATE
+        - script:
+            name: Set permissions for ssh key
+            code: chmod 0400 $HOME/.ssh/id_rsa
+        - script:
+            name: Prepare gitconfig
+            code: |
+                git config --global user.email "kazuhito-m@example.com"
+                git config --global user.name "kazuhito-m"
+        - script:
+            name: Build and Deploy to github pages
+            code: |
+                npm run download-typings
+                npm run deploy
