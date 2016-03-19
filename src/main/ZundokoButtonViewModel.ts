@@ -40,14 +40,14 @@ class ZundokoButtonViewModel {
         let nowNo = this.zundokoHistory().length + 1;
         this.latestZundoko(ZundokoRecord.create(nowNo,true));
         // 結果をローカル保存する。
-        this.store.save(this);
+        this.saveLocal();
     }
 
     // ズンドコ履歴のクリア。
     public clearZundokoHistory() {
         this.latestZundoko(ZundokoRecord.create(1,false));
         this.zundokoHistory.splice(0, this.zundokoHistory().length);
-        this.store.save(this);
+        this.saveLocal();
     }
     
     // Twitterコメントを飛ばす…ための窓のURLを作成する。
@@ -70,6 +70,11 @@ class ZundokoButtonViewModel {
             + "&url=http://bit.ly/259xEoF&hashtags="
             + encodeURIComponent(NAME);
         return url;
+    }
+    
+    // localStrageに保存する。
+    private saveLocal() {
+        this.store.save(this);
     }
     
     // プロパティ
