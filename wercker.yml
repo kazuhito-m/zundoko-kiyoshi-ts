@@ -9,15 +9,8 @@ build:
                 echo "node version $(node -v) running"
                 echo "npm version $(npm -v) running"
         - script:
-            name: Prepare gitconfig
+            name: version incriment and build and commit
             code: |
-                git config --global user.email "kazuhito-m@example.com"
-                git config --global user.name "kazuhito-m"
-        - script:
-            name: Build and Deploy to github pages
-            code: |
-                git clone --depth=50 --quiet --progress --no-single-branch git@github.com:kazuhito-m/zundoko-kiyoshi-ts.git .publish
-                npm run download-typings
-                npm run deploy
-                find ./src
-                find ./.publish
+                npm run verup-patch
+                npm run build
+                npm run git-push
