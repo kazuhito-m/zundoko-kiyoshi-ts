@@ -125,7 +125,7 @@ gulp.task('build', function () {
         .pipe(gulp.dest('./site/js'));
 });
 
-gulp.task('deploy', ['verup-patch'], function () {
+gulp.task('deploy', ['verup-patch','build'], function () {
     return gulp.src('./site/**/*')
         .pipe(ghPages())
         .on('end', function () {
