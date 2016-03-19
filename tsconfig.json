@@ -13,6 +13,8 @@
     "src/typings/main.d.ts",
     "src/main/ZundokoKiyoshi.ts",
     "src/main/ZundokoButtonViewModel.ts",
+    "src/main/ZundokoRecord.ts",
+    "src/main/ZundokoStore.ts",
     "src/test/ZundokoKiyoshiTest.ts"
   ]
 }
