@@ -2,7 +2,7 @@
 "use strict";
 class AppVersion {
 }
-AppVersion.version = "1.0.6";
+AppVersion.version = "1.0.7";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = AppVersion;
 
@@ -15,7 +15,8 @@ class TwitterLinkMaker {
         const OMIT_SUFFIX = "…]";
         let word = "";
         if (record.line.length > 0) {
-            word = "kiyoshi()関数で " + record.count.toString(10) + " ズンドコが出ました。[" + record.line + "]";
+            word = "kiyoshi()関数で " + record.count.toString(10) + " ズンドコが出ました。("
+                + record.no + "回目結果) [" + record.line + "]";
             if (word.length > MAX) {
                 word = word.substring(0, MAX - OMIT_SUFFIX.length) + OMIT_SUFFIX;
             }
@@ -57,6 +58,9 @@ class ZundokoButtonViewModel {
     }
     get latestCount() {
         return this.latestZundoko().count;
+    }
+    get latestNo() {
+        return this.latestZundoko().no;
     }
     execKiyoshi() {
         if (this.latestZundoko().line.length > 0) {
