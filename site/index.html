@@ -105,9 +105,9 @@
           <h3 class="panel-title text-left">直近のズンドコは…</h3>
         </div>
         <div class="panel-body text-left">
-          <h1><span data-bind="text: latestZundoko"></span></h1>
+          <h1><span data-bind="text: latestZundoko().line"></span></h1>
         </div>
-        <div class="panel-footer text-right">の <span data-bind="text: zundokoCount"></span> ズンドコです。</div>
+        <div class="panel-footer text-right">の <span data-bind="text: latestZundoko().count"></span> ズンドコです。</div>
       </div>
     </section>
 

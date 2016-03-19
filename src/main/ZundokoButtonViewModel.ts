@@ -7,8 +7,7 @@ class ZundokoButtonViewModel {
 
     // プロパティっぽいもの
     public zundokoHistory: KnockoutObservableArray<ZundokoRecord>;
-    public latestZundoko: KnockoutObservable<string>;
-    public zundokoCount: KnockoutObservable<number>;
+    public latestZundoko: KnockoutObservable<ZundokoRecord>;
     public appVersion: KnockoutObservable<string>;
     public getTwitterHref: KnockoutComputed<string>;
 
@@ -22,44 +21,34 @@ class ZundokoButtonViewModel {
     public constructor() {
         // ストレージから読めるようなら、一件目をちぎって表示、そうでなければ空表示。
         let loaded = this.store.load();
-        let latest:ZundokoRecord = (loaded.length > 0) ? loaded.shift() : new ZundokoRecord(0,"",0);
+        let latest:ZundokoRecord = (loaded.length > 0) ? loaded.shift() : ZundokoRecord.create(0,false);
 
-        this.latestZundoko = ko.observable(latest.line);
-        this.zundokoCount = ko.observable(latest.no);
+        this.latestZundoko = ko.observable(latest);
         this.zundokoHistory = ko.observableArray(loaded);
+        this.appVersion = ko.observable(AppVersion.version);
         
         this.getTwitterHref = ko.computed(():string => {
             return this.makeTwitterLinkUrl();
         },this);
 
-        this.appVersion = ko.observable(AppVersion.version);
     }
 
     //　ズンドコ実行！
     public execKiyoshi() {
         // 現在表示中のズンドコ内容を配列の前に足す。
-        if (this.latestZundoko().length > 0) {
-            this.zundokoHistory.unshift(this.getNowZundokoRecord());
+        if (this.latestZundoko().line.length > 0) {
+            this.zundokoHistory.unshift(this.latestZundoko());
         }
         // 新たにズンドコする。
-        let line = this.engine.createZundokoLine();
-        let count = this.engine.countZundoko(line);
-        this.latestZundoko(line);
-        this.zundokoCount(count);
+        let nowNo = this.zundokoHistory().length + 1;
+        this.latestZundoko(ZundokoRecord.create(nowNo,true));
         // 結果をローカル保存する。
         this.store.save(this);
     }
 
-    // 現在表示されてる「ズンドコ」をRecordのカタチを取る。
-    public getNowZundokoRecord():ZundokoRecord {
-        let no:number = this.zundokoHistory().length + 1;
-        return new ZundokoRecord(no, this.latestZundoko(), this.zundokoCount());
-    }
-
     // ズンドコ履歴のクリア。
     public clearZundokoHistory() {
-        this.latestZundoko("");
-        this.zundokoCount(0);
+        this.latestZundoko(ZundokoRecord.create(1,false));
         this.zundokoHistory.splice(0, this.zundokoHistory().length);
         this.store.save(this);
     }
@@ -69,10 +58,9 @@ class ZundokoButtonViewModel {
         const MAX = 107;
         const NAME = "ズンドコボタン";
         let word = "";
-        let line = this.latestZundoko();
-        if (line.length > 0) {
-            let count = this.engine.countZundoko(line);
-            word = "kiyoshi()関数で " + count.toString(10) + " ズンドコが出ました。[" + line + "]";
+        let latest:ZundokoRecord = this.latestZundoko();
+        if (latest.line.length > 0) {
+            word = "kiyoshi()関数で " + latest.count.toString(10) + " ズンドコが出ました。[" + latest.line + "]";
             if (word.length > MAX) {
                 word = word.substring(0,MAX - 2) + "…]";
             }
@@ -91,8 +79,26 @@ class ZundokoButtonViewModel {
 
 // 「ボタン一回押した分」の情報を持つケースクラス…のようなもの。
 class ZundokoRecord {
+    
     public constructor(public no:number, public line:string , public count:number) {
     }
+    
+    // kiyoshi()を実行して、自らにズンドコ文字列をセットする。
+    public execKiyoshi() {
+        // 心臓と言うべき「ズンドコキヨシ」オブジェクト。
+        let engine = new ZundokoKiyoshi();
+        // 新たにズンドコする。
+        this.line = engine.createZundokoLine();
+        this.count = engine.countZundoko(this.line);
+    }
+
+    // 新たにレコードを生む。その際「kiyoshi()実行が必要」ならそれを。  
+    public static create(no:number, execKiyoshi:boolean):ZundokoRecord {
+        let rec = new ZundokoRecord(no,"",0);
+        if (execKiyoshi) rec.execKiyoshi();
+        return rec;
+    }
+    
 }
 
 // 履歴情報を永続化するクラス。
@@ -115,7 +121,7 @@ class ZundokoStore {
     public save(target:ZundokoButtonViewModel) {
         if (this.localSave) {
             let forSave:ZundokoRecord[] = [];
-            let nowZundoko = target.getNowZundokoRecord();
+            let nowZundoko = target.latestZundoko();
             // 一度でもボタンが押されてたら、
             // 現在表示中のものまでを含んだ配列にし、JSONでローカル保存。
             if (nowZundoko.line.length > 0) {
