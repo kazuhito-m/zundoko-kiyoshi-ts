@@ -20,3 +20,9 @@ build:
                 npm run download-typings
                 npm run build
                 npm run git-push
+deploy:
+    steps:
+        - script:
+            name: Build and Deploy to github pages
+            code: |
+                npm run git-push
