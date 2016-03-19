@@ -11,11 +11,12 @@ export default class TwitterLinkMaker {
     public makeUrl(record: ZundokoRecord): string {
         const NAME = "ズンドコボタン";
         const MAX = TwitterLinkMaker.MAX;
+        const OMIT_SUFFIX = "…]";
         let word = "";
         if (record.line.length > 0) {
             word = "kiyoshi()関数で " + record.count.toString(10) + " ズンドコが出ました。[" + record.line + "]";
             if (word.length > MAX) {
-                word = word.substring(0, MAX - 2) + "…]";
+                word = word.substring(0, MAX - OMIT_SUFFIX.length) + OMIT_SUFFIX;
             }
         } else {
             word = NAME + "は、kiyoshi()関数をいつでも何度でも好きなだけ叩けます！";
