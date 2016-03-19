@@ -74,6 +74,15 @@ class ZundokoButtonViewModel {
             + encodeURIComponent(NAME);
         return url;
     }
+    
+    // プロパティ
+    public get latestLine():string {
+        return this.latestZundoko().line;
+    }
+
+    public get latestCount():number {
+        return this.latestZundoko().count;
+    }
 
 }
 
