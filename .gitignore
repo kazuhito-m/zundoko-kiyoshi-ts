@@ -5,3 +5,4 @@ coverage/
 .publish/
 *.js.map
 site/js/app.js
+*.log
