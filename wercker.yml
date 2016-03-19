@@ -8,9 +8,6 @@ build:
             code: |
                 echo "node version $(node -v) running"
                 echo "npm version $(npm -v) running"
-deploy:
-    steps:
-        - npm-install
         - script:
             name: Prepare .ssh directory
             code: mkdir -p "$HOME/.ssh"
