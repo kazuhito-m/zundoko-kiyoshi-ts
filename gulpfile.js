@@ -5,6 +5,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var istanbul = require('gulp-istanbul');
 var remapIstanbul = require('remap-istanbul/lib/gulpRemapIstanbul');
 var del = require('del');
+var mkdirp = require('mkdirp');
 var concat = require("gulp-concat");
 var browserify = require("browserify");
 var source = require('vinyl-source-stream');
@@ -17,6 +18,7 @@ var git = require('gulp-git');
 var typings = require("gulp-typings");
 var runSequence = require('run-sequence');
 var webserver = require('gulp-webserver');
+var plumber = require('gulp-plumber');
 var tsProject = typescript.createProject('tsconfig.json', function () {
     // typescriptのオブジェクトと、tsconfig.jsonを読み込んだプロジェクトオブジェクト作成。
     typescript: require('typescript')
@@ -28,7 +30,7 @@ const TEST_BUILD_DIR = './test-build/';
 // タスク群。
 
 gulp.task("download-typings", function () {
-    gulp.src("./src/typings.json")
+    return gulp.src("./src/typings.json")
         .pipe(typings());
 });
 
@@ -37,6 +39,7 @@ gulp.task('test-clean', function (cb) {
 });
 
 gulp.task('test-src-copy', ['test-clean'], function () {
+    mkdirp(TEST_BUILD_DIR);
     return gulp.src(['./src/**'])
         .pipe(gulp.dest(TEST_BUILD_DIR));
 });
@@ -167,5 +170,7 @@ gulp.task('webserver', function () {
 
 // 「開発」というタスク。WebServerと、ソース変更で再テスト、再ビルド。
 gulp.task('develop', ['webserver'], function () {
-    gulp.watch('./**/*.ts', ['test', 'build']);
+    gulp.watch('./src/**/*.ts', function() {
+        runSequence('test', 'build')
+    });
 });
