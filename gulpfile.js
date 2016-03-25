@@ -26,7 +26,7 @@ const TEST_BUILD_DIR = './test-build/';
 
 // タスク群。
 
-gulp.task("download-typings",function(){
+gulp.task("download-typings", function () {
     gulp.src("./src/typings.json")
         .pipe(typings());
 });
@@ -141,7 +141,7 @@ gulp.task('upload-ghpages', function () {
 // githubの操作用トークンを変数から取るように成ってる。
 gulp.task('upload-ghpages-for-wercker', function () {
     return gulp.src('./site/**/*')
-        .pipe(ghPages({remoteUrl: "https://$GITHUB_TOKEN@github.com/kazuhito-m/zundoko-kiyoshi-ts"}));
+        .pipe(ghPages({ remoteUrl: "https://$GITHUB_TOKEN@github.com/kazuhito-m/zundoko-kiyoshi-ts" }));
 });
 
 gulp.task('git-push', function () {
