@@ -16,6 +16,7 @@ var through = require('through2');
 var git = require('gulp-git');
 var typings = require("gulp-typings");
 var runSequence = require('run-sequence');
+var webserver = require('gulp-webserver');
 var tsProject = typescript.createProject('tsconfig.json', function () {
     // typescriptのオブジェクトと、tsconfig.jsonを読み込んだプロジェクトオブジェクト作成。
     typescript: require('typescript')
@@ -153,4 +154,13 @@ gulp.task('deploy', function (cb) {
     // Version番号をインクリメントしているので、git pushをしておく
     // (色々あったら問題だがgit的にはクリーンな状態でdeployしているだろうという推測)
     return runSequence('verup-patch', 'build', 'upload-ghpages', 'git-push', cb);
+});
+
+gulp.task('webserver', function () {
+    gulp.src('./site')
+        .pipe(webserver({
+            livereload: true,
+            fallback: 'index.html',
+            open: true
+        }));
 });
