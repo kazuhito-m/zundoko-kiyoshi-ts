@@ -164,3 +164,8 @@ gulp.task('webserver', function () {
             open: true
         }));
 });
+
+// 「開発」というタスク。WebServerと、ソース変更で再テスト、再ビルド。
+gulp.task('develop', ['webserver'], function () {
+    gulp.watch('./**/*.ts', ['test', 'build']);
+});
