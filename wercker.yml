@@ -11,6 +11,7 @@ build:
         - script:
               name: build and deploy
               code: |
+                npm run download-typings
                 npm run build
                 git clone -b gh-pages "https://$GITHUB_TOKEN@github.com/kazuhito-m/zundoko-kiyoshi-ts" .publish
                 cd .publish
