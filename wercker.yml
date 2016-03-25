@@ -15,12 +15,10 @@ build:
                 npm run build
                 git config --global user.email "kazuhito-m@example.com"
                 git config --global user.name "kazuhito-m"
-                git clone -b gh-pages "https://$GITHUB_TOKEN@github.com/kazuhito-m/zundoko-kiyoshi-ts" .publish
-                cd .publish
-                rm -rf ./*
-                cp -r ../site/* ./
-                echo '現在のディレクトリ状況'
-                pwd
-                ls -l
-                git commit . -m 'upload to gh-pages.'
-                git push "https://$GITHUB_TOKEN@github.com/kazuhito-m/zundoko-kiyoshi-ts" HEAD:gh-pages
+                npm run upload-ghpages-for-wercker
+                # git clone -b gh-pages "https://$GITHUB_TOKEN@github.com/kazuhito-m/zundoko-kiyoshi-ts" .publish
+                # cd .publish
+                # rm -rf ./*
+                # cp -r ../site/* ./
+                # git commit . -m 'upload to gh-pages.'
+                # git push "https://$GITHUB_TOKEN@github.com/kazuhito-m/zundoko-kiyoshi-ts" HEAD:gh-pages

@@ -137,6 +137,13 @@ gulp.task('upload-ghpages', function () {
         .pipe(ghPages());
 });
 
+// WerckerCI用の「スペシャルｇｈ−pagesアップロードタスク」。
+// githubの操作用トークンを変数から取るように成ってる。
+gulp.task('upload-ghpages-for-wercker', function () {
+    return gulp.src('./site/**/*')
+        .pipe(ghPages({remoteUrl: "https://$GITHUB_TOKEN@github.com/kazuhito-m/zundoko-kiyoshi-ts"}));
+});
+
 gulp.task('git-push', function () {
     git.push();
 });

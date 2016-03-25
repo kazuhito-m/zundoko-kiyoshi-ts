@@ -15,7 +15,8 @@
     "build": "gulp build",
     "upload-ghpages": "gulp upload-ghpages",
     "git-push": "gulp git-push",
-    "deploy": "gulp deploy"
+    "deploy": "gulp deploy",
+    "upload-ghpages-for-wercker": "gulp upload-ghpages-for-wercker"
   },
   "repository": {
     "type": "git",
