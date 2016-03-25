@@ -8,11 +8,13 @@ build:
             code: |
                 echo "node version $(node -v) running"
                 echo "npm version $(npm -v) running"
+deploy:
+    steps:
         - script:
-              name: build and deploy(for Github Pages)
-              code: |
-                git config --global user.email "kazuhito-m@example.com"
-                git config --global user.name "kazuhito-m"
-                npm run download-typings
-                npm run build
-                npm run upload-ghpages-for-wercker
+            name: build and deploy(for Github Pages)
+            code: |
+              git config --global user.email "kazuhito-m@example.com"
+              git config --global user.name "kazuhito-m"
+              npm run download-typings
+              npm run build
+              npm run upload-ghpages-for-wercker
