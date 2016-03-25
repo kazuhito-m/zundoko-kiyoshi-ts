@@ -13,6 +13,8 @@ build:
               code: |
                 npm run download-typings
                 npm run build
+                git config --global user.email "kazuhito-m@example.com"
+                git config --global user.name "kazuhito-m"
                 git clone -b gh-pages "https://$GITHUB_TOKEN@github.com/kazuhito-m/zundoko-kiyoshi-ts" .publish
                 cd .publish
                 rm -rf ./*
