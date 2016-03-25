@@ -9,16 +9,10 @@ build:
                 echo "node version $(node -v) running"
                 echo "npm version $(npm -v) running"
         - script:
-              name: build and deploy
+              name: build and deploy(for Github Pages)
               code: |
-                npm run download-typings
-                npm run build
                 git config --global user.email "kazuhito-m@example.com"
                 git config --global user.name "kazuhito-m"
+                npm run download-typings
+                npm run build
                 npm run upload-ghpages-for-wercker
-                # git clone -b gh-pages "https://$GITHUB_TOKEN@github.com/kazuhito-m/zundoko-kiyoshi-ts" .publish
-                # cd .publish
-                # rm -rf ./*
-                # cp -r ../site/* ./
-                # git commit . -m 'upload to gh-pages.'
-                # git push "https://$GITHUB_TOKEN@github.com/kazuhito-m/zundoko-kiyoshi-ts" HEAD:gh-pages
