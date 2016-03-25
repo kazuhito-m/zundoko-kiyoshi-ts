@@ -112,6 +112,8 @@ git commit ./typings.json -m 'なんだかんだ'
 + https://www.npmjs.com/package/gulp-git
 + http://horicdesign.com/js/entry-146.html
 + http://dackdive.hateblo.jp/entry/2014/09/15/155641
++ http://qiita.com/kabane/items/186017e24d9ed606b4ae
++ https://github.com/schickling/gulp-webserver
 
 ### WerckerCIまわり
 
