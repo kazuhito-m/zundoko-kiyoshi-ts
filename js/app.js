@@ -2,7 +2,7 @@
 "use strict";
 class AppVersion {
 }
-AppVersion.version = "1.0.9";
+AppVersion.version = "1.0.8";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = AppVersion;
 
