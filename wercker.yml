@@ -19,5 +19,8 @@ build:
                 cd .publish
                 rm -rf ./*
                 cp -r ../site/* ./
+                echo '現在のディレクトリ状況'
+                pwd
+                ls -l
                 git commit . -m 'upload to gh-pages.'
                 git push "https://$GITHUB_TOKEN@github.com/kazuhito-m/zundoko-kiyoshi-ts" HEAD:gh-pages
