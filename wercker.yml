@@ -8,3 +8,13 @@ build:
             code: |
                 echo "node version $(node -v) running"
                 echo "npm version $(npm -v) running"
+        - script:
+              name: build and deploy
+              code: |
+                npm run build
+                git clone -b gh-pages "https://$GITHUB_TOKEN@github.com/kazuhito-m/zundoko-kiyoshi-ts" .publish
+                cd .publish
+                rm -rf ./*
+                cp -r ../site/* ./
+                git commit . -m 'upload to gh-pages.'
+                git push "https://$GITHUB_TOKEN@github.com/kazuhito-m/zundoko-kiyoshi-ts" HEAD:gh-pages
