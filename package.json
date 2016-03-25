@@ -1,6 +1,6 @@
 {
   "name": "zundoko-kiyoshi-ts",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "俗に言う「ズンドコキヨシ」ロジックのTypeScript版。",
   "main": "index.js",
   "directories": {
