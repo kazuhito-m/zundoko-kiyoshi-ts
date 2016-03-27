@@ -170,7 +170,7 @@ gulp.task('webserver', function () {
 
 // 「開発」というタスク。WebServerと、ソース変更で再テスト、再ビルド。
 gulp.task('develop', ['webserver'], function () {
-    gulp.watch('./src/**/*.ts', function() {
+    return gulp.watch('./src/**/*.ts', function() {
         runSequence('test', 'build')
     });
 });
