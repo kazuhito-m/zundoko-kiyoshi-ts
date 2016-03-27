@@ -11,8 +11,8 @@ build:
         - script:
             name: build and deploy(for Github Pages)
             code: |
-              git config --global user.email "kazuhito-m@example.com"
-              git config --global user.name "kazuhito-m"
+              git config --global user.email "wercker@example.com"
+              git config --global user.name "wercker"
               npm run download-typings
               npm run build
               npm run upload-ghpages-for-wercker
